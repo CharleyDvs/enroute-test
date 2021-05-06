@@ -16,7 +16,11 @@ export const CharacterList = ({ characters }) => {
   }
 
   useEffect(() => {
-    setCurrentCharacters(characters.slice(currentPage * 4, currentPage * 4 + 4))
+    setCurrentCharacters(
+      characters.length > 4
+        ? characters.slice(currentPage * 4, currentPage * 4 + 4)
+        : characters
+    )
   }, [characters, currentPage])
 
   return (
