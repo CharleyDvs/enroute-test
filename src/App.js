@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react"
 
+import { CharacterList } from "./components/CharacterList"
+
 function App() {
   const [isLoading, setIsLoading] = useState(false)
   const [characterList, setCharacterList] = useState([])
+  const [filteredCharacters, setFilteredCharacters] = useState([])
+  const [filterValue, setFilterValue] = useState("")
 
   const fetchCharacters = async (url) => {
     try {
@@ -13,7 +17,6 @@ function App() {
       console.warn("Error", err)
     }
   }
-
   const fetchAllCharacters = async (url, allCharacters = []) => {
     setIsLoading(true)
     try {
@@ -30,19 +33,29 @@ function App() {
     }
   }
 
+  const handleSearchInput = (e) => {
+    setFilterValue(e.target.value)
+  }
+
   useEffect(() => {
-    fetchAllCharacters("https://swapi.dev/ap/people/")
+    const filteredArray = characterList.filter((character) =>
+      character.name.toLowerCase().includes(filterValue.toLowerCase())
+    )
+    setFilteredCharacters(filteredArray)
+  }, [filterValue, characterList])
+
+  useEffect(() => {
+    fetchAllCharacters("https://swapi.dev/api/people/")
   }, [])
 
   return (
     <div className="App">
       {isLoading && <h1>Loading...</h1>}
-      {characterList.length > 1 && (
-        <ul>
-          {characterList.map((character) => (
-            <li key={character.name + character.birthyear}>{character.name}</li>
-          ))}
-        </ul>
+      {!isLoading && characterList.length > 0 && (
+        <>
+          <input type="text" onChange={handleSearchInput} />
+          <CharacterList characters={filteredCharacters} />
+        </>
       )}
     </div>
   )
