@@ -1,6 +1,6 @@
 # Star wars list of characters
 
-This app displays a list of the mayority of characters from the Star Wars universe, all the data is provided form the Star Wars API you can check mor about them in https://swapi.dev/
+This app displays a list of the mayority of characters from the Star Wars universe, all the data is provided from the Star Wars API, you can check more about the service in https://swapi.dev/
 
 ## Quick start
 
