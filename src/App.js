@@ -3,6 +3,7 @@ import { connect } from "react-redux"
 
 import { CharacterList } from "./components/CharacterList"
 import { Spinner } from "./components/Spinner"
+import { Message } from "./components/Message"
 import { addCharacterList } from "./store/characters/characterActions"
 
 function App({
@@ -19,11 +20,12 @@ function App({
   }
 
   useEffect(() => {
-    const filteredArray = characters.filter((character) =>
-      character.name.toLowerCase().includes(filterValue.toLowerCase())
-    )
-
-    setFilteredCharacters(filteredArray)
+    if (characters) {
+      const filteredArray = characters.filter((character) =>
+        character.name.toLowerCase().includes(filterValue.toLowerCase())
+      )
+      setFilteredCharacters(filteredArray)
+    }
   }, [filterValue, characters])
 
   useEffect(() => {
@@ -36,11 +38,14 @@ function App({
         className="search-input"
         type="text"
         onChange={handleSearchInput}
-        placeholder="Search people"
+        placeholder="Search people..."
       />
       {charactersLoading && <Spinner />}
-      {!charactersLoading && characters.length > 0 && (
+      {!charactersLoading && characters && (
         <CharacterList characters={filteredCharacters} />
+      )}
+      {!charactersLoading && charactersError && (
+        <Message messageText=" I felt a great disturbance in the Force, try again later..." />
       )}
     </div>
   )

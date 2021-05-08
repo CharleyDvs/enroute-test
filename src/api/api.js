@@ -6,7 +6,7 @@ export const fetchCharacters = async (url) => {
     const { results, next } = response.data
     return { results, next }
   } catch (err) {
-    console.warn("Error", err)
+    throw new Error(err)
   }
 }
 
@@ -19,6 +19,6 @@ export const fetchAllCharacters = async (url, allCharacters = []) => {
     }
     return allCharacters
   } catch (err) {
-    console.warn(err)
+    throw new Error(err)
   }
 }

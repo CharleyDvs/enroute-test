@@ -1,7 +1,7 @@
 import { characterActionTypes } from "./charactersActionTypes"
 
 const initialState = {
-  characterList: [],
+  characterList: null,
   error: null,
   loading: false,
 }

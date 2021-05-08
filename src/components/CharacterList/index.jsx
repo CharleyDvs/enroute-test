@@ -56,18 +56,18 @@ export const CharacterList = ({ characters }) => {
       </ul>
       <div className="list-controls">
         <div className="controls">
-          <span
-            className={`${isPrevDisabled && "disabled"}`}
+          <button
+            className={`${isPrevDisabled ? "disabled" : ""}`}
             onClick={returnPage}
           >
             Back
-          </span>
-          <span
-            className={`${isNextDisabled && "disabled"}`}
+          </button>
+          <button
+            className={`${isNextDisabled ? "disabled" : ""}`}
             onClick={advancePage}
           >
             Next
-          </span>
+          </button>
         </div>
         <div className="page-number-container">
           <p>Page {currentPage + 1}</p>
