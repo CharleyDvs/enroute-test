@@ -1,0 +1,23 @@
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 2rem;
+  width: 100%;
+  color: white;
+  background-color: rgba($color: #000000, $alpha: 0.5);
+  .spinner {
+    transform: scale(3);
+    animation: spinner 2s ease infinite;
+  }
+}
+
+@keyframes spinner {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

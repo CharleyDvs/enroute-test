@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { connect } from "react-redux"
 
 import { CharacterList } from "./components/CharacterList"
+import { Spinner } from "./components/Spinner"
 import { addCharacterList } from "./store/characters/characterActions"
 
 function App({
@@ -27,7 +28,7 @@ function App({
 
   useEffect(() => {
     addCharacterList("https://swapi.dev/api/people/")
-  }, [])
+  }, [addCharacterList])
 
   return (
     <div className="App">
@@ -37,7 +38,7 @@ function App({
         onChange={handleSearchInput}
         placeholder="Search people"
       />
-      {charactersLoading && <h1>Loading...</h1>}
+      {charactersLoading && <Spinner />}
       {!charactersLoading && characters.length > 0 && (
         <CharacterList characters={filteredCharacters} />
       )}
