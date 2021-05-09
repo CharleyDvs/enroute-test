@@ -1,27 +1,38 @@
+import React from "react"
 import { useEffect, useState } from "react"
 
-export const CharacterList = ({ characters }) => {
+interface Character {
+  name: string
+  gender: string
+  birth_year: string
+}
+
+type Props = {
+  characters: Character[]
+}
+
+export const CharacterList = ({ characters }: Props) => {
   const [currentPage, setCurrentPage] = useState(0)
-  const [currentCharacters, setCurrentCharacters] = useState([])
+  const [currentCharacters, setCurrentCharacters] = useState<Character[]>([])
   const [isPrevDisabled, setPrevDisabled] = useState(false)
   const [isNextDisabled, setNextDisabled] = useState(false)
 
-  const advancePage = () => {
+  const advancePage = (): void => {
     if (characters.length - 4 > currentPage * 4) {
       setCurrentPage(currentPage + 1)
     }
   }
-  const returnPage = () => {
+  const returnPage = (): void => {
     if (currentPage > 0) {
       setCurrentPage(currentPage - 1)
     }
   }
 
-  useEffect(() => {
+  useEffect((): void => {
     setCurrentPage(0)
   }, [characters])
 
-  useEffect(() => {
+  useEffect((): void => {
     if (currentPage === 0) {
       setPrevDisabled(true)
     } else {
@@ -34,7 +45,7 @@ export const CharacterList = ({ characters }) => {
     }
   }, [currentPage, characters])
 
-  useEffect(() => {
+  useEffect((): void => {
     setCurrentCharacters(
       characters.length > 4
         ? characters.slice(currentPage * 4, currentPage * 4 + 4)
@@ -46,7 +57,7 @@ export const CharacterList = ({ characters }) => {
     <div className="character-list">
       <ul>
         {currentCharacters.map((character) => (
-          <li key={character.name + character.birthyear}>
+          <li key={character.name + character.birth_year}>
             <div className="name-container">
               <h2>{character.name}</h2>
             </div>
