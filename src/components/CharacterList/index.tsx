@@ -1,17 +1,19 @@
 import React from "react"
 import { useEffect, useState } from "react"
 
-interface Character {
+export interface Character {
   name: string
   gender: string
   birth_year: string
 }
 
-type Props = {
+export type CharacterListProps = {
   characters: Character[]
 }
 
-export const CharacterList = ({ characters }: Props) => {
+export const CharacterList = ({
+  characters,
+}: CharacterListProps): JSX.Element => {
   const [currentPage, setCurrentPage] = useState(0)
   const [currentCharacters, setCurrentCharacters] = useState<Character[]>([])
   const [isPrevDisabled, setPrevDisabled] = useState(false)
